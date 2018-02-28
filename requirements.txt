@@ -1,0 +1,17 @@
+absl-py==0.1.10
+bleach==1.5.0
+Flask==0.10.1
+gevent==1.2.2
+greenlet==0.4.13
+gunicorn==19.7.1
+html5lib==0.9999999
+itsdangerous==0.24
+Jinja2==2.9.6
+Markdown==2.6.11
+MarkupSafe==1.0
+numpy==1.14.1
+protobuf==3.5.1
+six==1.11.0
+tensorflow==1.5.0
+tensorflow-tensorboard==1.5.1
+Werkzeug==0.14.1
