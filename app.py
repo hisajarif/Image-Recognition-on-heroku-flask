@@ -9,7 +9,7 @@ with tf.gfile.FastGFile('model/output_graph.pb','rb') as f:
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    return "Hello World Arif!"
 
 @app.route('/predict')
 def predict():
