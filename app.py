@@ -28,7 +28,6 @@ def upload_file():
             print(filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return 'success!'
-        sess.close()
     return 'try again'
 
 @app.route('/predict', methods=['POST'])
