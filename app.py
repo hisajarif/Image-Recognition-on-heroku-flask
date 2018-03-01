@@ -1,6 +1,9 @@
-from flask import Flask
+from flask import Flask, render_template, request
 import tensorflow as tf
 app = Flask(__name__)
+
+UPLOAD_FOLDER = os.path.basename('uploads')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 with tf.gfile.FastGFile('model/output_graph.pb','rb') as f:
     graph_def = tf.GraphDef()
@@ -10,6 +13,16 @@ with tf.gfile.FastGFile('model/output_graph.pb','rb') as f:
 @app.route('/')
 def hello():
     return "Hello World!"
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    file = request.files['image']
+    f = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+
+    # add your custom code to check that the uploaded file is a valid image and not a malicious file (out-of-scope for this post)
+    file.save(f)
+
+    return 'success!'
 
 @app.route('/predict')
 def predict():
