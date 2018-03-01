@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import tensorflow as tf
+import os
 app = Flask(__name__)
 
 UPLOAD_FOLDER = os.path.basename('uploads')
