@@ -1,6 +1,7 @@
 from flask import Flask, request, make_response
 import tensorflow as tf
 from werkzeug import secure_filename
+import json
 import os
 UPLOAD_FOLDER = 'uploaded'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
@@ -95,4 +96,4 @@ def webhook():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run()
