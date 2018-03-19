@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, make_response
 import tensorflow as tf
 from werkzeug import secure_filename
 import os
@@ -70,5 +70,29 @@ def test_model():
         sess.close()
     return result
 
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    req = request.get_json(silent=True, force=True)
+    print("Request:")
+    print(json.dumps(req, indent=4))
+
+    speech = "Today the weather in INDIA"
+    print("Response:")
+    print(speech)
+
+    res = {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
+    res = json.dumps(res, indent=4)
+    print(res)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
+    return r
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=False)
