@@ -5,6 +5,7 @@ import json
 import os
 UPLOAD_FOLDER = 'uploaded'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+result = ""
 
 app = Flask(__name__)
 
@@ -21,10 +22,20 @@ sess = tf.Session()
 label_lines = [line.rstrip() for line in tf.gfile.GFile('model/output_labels.txt')]
 softmax_tensor = sess.graph.get_tensor_by_name('final_result:0')
 
-@app.route('/', methods=['POST'])
-def hello():
-    result = ""
+@app.route('/', methods=['GET'])
+def display():
+    global result
+    if result == "":
+        return "No Camera scan result to show!"
+    else:
+        return result
+
+
+@app.route('/Scan', methods=['POST'])
+def scan():
+    global result
     global tf
+    result = ""
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
@@ -44,7 +55,6 @@ def hello():
             topScore2 = predictions[0][top_k[1]]
             if topScore1-topScore2 < 30 :
                 result += '\n%s  =  %2.2f ' % (label_lines[top_k[1]], topScore2)
-                pass
     return result
 
 if __name__ == '__main__':
