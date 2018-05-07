@@ -51,10 +51,10 @@ def scan():
             #     score = predictions[0][node_id]
             #     result = result + '\n'+'%s (score = %.5f)' % (human_string, score)
             topScore1 = predictions[0][top_k[0]]
-            result = "\nI am %2.2f % sure this is %s." % (topScore2,label_lines[top_k[0]])
+            result = "\nI am " + str(round(topScore1,2)) + " % sure this is " + label_lines[top_k[0]]+"."
             topScore2 = predictions[0][top_k[1]]
             if topScore1-topScore2 < 30 :
-                result += "\nI am %2.2f % sure this is %s." % (topScore2,label_lines[top_k[1]])
+                result += "\n Also " + str(round(topScore2,2)) + " % similar to " + label_lines[top_k[1]]+"."
     return result
 
 if __name__ == '__main__':
