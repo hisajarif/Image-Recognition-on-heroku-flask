@@ -51,10 +51,10 @@ def scan():
             #     score = predictions[0][node_id]
             #     result = result + '\n'+'%s (score = %.5f)' % (human_string, score)
             topScore1 = predictions[0][top_k[0]]
-            result = '%s  =  %2.2f ' % (label_lines[top_k[0]], topScore1)
+            result = "\nI am %2.2f % sure this is %s." % (topScore2,label_lines[top_k[0]])
             topScore2 = predictions[0][top_k[1]]
             if topScore1-topScore2 < 30 :
-                result += '\n%s  =  %2.2f ' % (label_lines[top_k[1]], topScore2)
+                result += "\nI am %2.2f % sure this is %s." % (topScore2,label_lines[top_k[1]])
     return result
 
 if __name__ == '__main__':
