@@ -28,7 +28,9 @@ def display():
     if result == "":
         return "No Camera scan result to show!"
     else:
-        return result
+        scan = result
+        result =""
+        return scan
 
 
 @app.route('/Scan', methods=['POST'])
